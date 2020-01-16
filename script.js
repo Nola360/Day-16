@@ -30,8 +30,8 @@ function Person(name, dob) {
 // console.log(kevin.age);
 
 // Contructor
-const ak = new Person('Akinola O Daramola Jr.', '12/31/1987');
-console.log(ak.calculateAge());
+// const ak = new Person('Akinola O Daramola Jr.', '12/31/1987');
+// console.log(ak.calculateAge());
 
 // String name
 const name1 = "James";
@@ -111,6 +111,57 @@ console.log(reg1);
 const reg2 = new RegExp('\\w+');
 console.log(reg2);
 
+// Prototype is an object 
+// Example Person.prototype
+// Object Literals inherited from ;[]object prototype
 
 
 
+
+function Person(firstName, lastName, dob) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  // this.age = age;
+  this.birthday = new Date(dob);
+  // this.calculateAge = function () {
+  //   const diff = Date.now() - this.birthday.getTime();
+  //   const ageDate = new Date(diff);
+  //   return Math.abs(ageDate.getUTCFullYear() - 1970);
+
+}
+
+
+// Putting info in prototype
+// Calculate Age
+const jamie = new Person('Jamie', 'Bond', '12/31/2020');
+const jane = new Person('Jane', 'Boon', 'November 31, 3030');
+
+
+Person.prototype.calculateAge = function () {
+  const diff = Date.now() - this.birthday.getTime();
+  const ageDate = new Date(diff);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+console.log(jamie.calculateAge());
+
+// Get full name
+Person.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
+}
+
+console.log(jamie.getFullName());
+
+// Gets Married
+Person.prototype.getsMarried = function (newLastName) {
+  this.lastName = newLastName;
+}
+
+jane.getsMarried('Bond');
+console.log(jane.getFullName());
+
+// HhsOwnPropertyMethod in prototype
+console.log(jane.hasOwnProperty('firstName'));
+
+// Will run as false because its not a property just in prototype
+console.log(jamie.hasOwnProperty('getFullName'));
